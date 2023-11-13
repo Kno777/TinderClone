@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct User {
+struct User: ProducesCardViewModel {
     
     // defining our properties for our model layer
     let name: String

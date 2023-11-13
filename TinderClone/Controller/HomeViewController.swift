@@ -18,10 +18,16 @@ class HomeViewController: UIViewController {
 //        User(name: "Jane", age: 18, profession: "Teacher", imageName: "lady4c"),
 //    ]
     
-    let cardViewModels = [
-        User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c").toCardViewModel(),
-        User(name: "Jane", age: 18, profession: "Teacher", imageName: "lady4c").toCardViewModel(),
-    ]
+    let cardViewModels: [CardViewModel] = {
+        let producers = [
+            User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c").toCardViewModel(),
+            User(name: "Jane", age: 18, profession: "Teacher", imageName: "lady4c").toCardViewModel(),
+            Advertiser(title: "Knoyi Mot", brandName: "Hamov Tnak", posterPhotoName: "panda").toCardViewModel(),
+        ] as [ProducesCardViewModel]
+        
+        let viewModels = producers.map ({ return $0.toCardViewModel() })
+        return viewModels
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,9 +57,7 @@ class HomeViewController: UIViewController {
         
         cardViewModels.forEach { cardVM in
             let cardView = CardView(frame: .zero)
-            cardView.imageView.image = UIImage(named: cardVM.imageName)
-            cardView.informationLabel.attributedText = cardVM.attributedString
-            cardView.informationLabel.textAlignment = cardVM.textAlignment
+            cardView.cardViewModel = cardVM
             cardsDeckView.addSubview(cardView)
             cardView.fillSuperview()
         }

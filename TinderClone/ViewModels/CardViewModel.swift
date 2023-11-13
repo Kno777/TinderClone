@@ -7,7 +7,16 @@
 
 import UIKit
 
-struct CardViewModel {
+protocol ProducesCardViewModel {
+    func toCardViewModel() -> CardViewModel
+}
+
+struct CardViewModel: ProducesCardViewModel {
+    
+    func toCardViewModel() -> CardViewModel {
+        return self
+    }
+    
     let imageName: String
     let attributedString: NSAttributedString
     let textAlignment: NSTextAlignment
