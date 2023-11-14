@@ -17,7 +17,7 @@ struct CardViewModel: ProducesCardViewModel {
         return self
     }
     
-    let imageName: String
+    let imageNames: [String]
     let attributedString: NSAttributedString
     let textAlignment: NSTextAlignment
 }

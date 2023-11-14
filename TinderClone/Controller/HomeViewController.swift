@@ -13,15 +13,10 @@ class HomeViewController: UIViewController {
     let cardsDeckView = UIView()
     let buttonsStackView = HomeBottomControlsStackView()
     
-//    let users = [
-//        User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c"),
-//        User(name: "Jane", age: 18, profession: "Teacher", imageName: "lady4c"),
-//    ]
-    
     let cardViewModels: [CardViewModel] = {
         let producers = [
-            User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c").toCardViewModel(),
-            User(name: "Jane", age: 18, profession: "Teacher", imageName: "lady4c").toCardViewModel(),
+            User(name: "Kelly", age: 23, profession: "Music DJ", imageNames: ["kelly1", "kelly2", "kelly3"]).toCardViewModel(),
+            User(name: "Jane", age: 18, profession: "Teacher", imageNames: ["jane1", "jane2", "jane3"]).toCardViewModel(),
             Advertiser(title: "Knoyi Mot", brandName: "Hamov Tnak", posterPhotoName: "panda").toCardViewModel(),
         ] as [ProducesCardViewModel]
         
