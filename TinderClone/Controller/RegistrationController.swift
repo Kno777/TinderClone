@@ -8,6 +8,8 @@
 import UIKit
 
 class RegistrationController: UIViewController {
+    
+    let gradientLayer = CAGradientLayer()
 
     // UI Components
     let selectPhotoButton: UIButton = {
@@ -54,6 +56,20 @@ class RegistrationController: UIViewController {
         button.layer.cornerRadius = 22
         return button
     }()
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if self.traitCollection.verticalSizeClass == .compact {
+            overallStackView.axis = .horizontal
+        } else {
+            overallStackView.axis = .vertical
+        }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        gradientLayer.frame = view.bounds
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -105,7 +121,7 @@ class RegistrationController: UIViewController {
         
         // let's try to figure out how tall the gap is from the register button to the bottom of the screen
         
-        let bottomSpace = view.frame.height - stackView.frame.origin.y - stackView.frame.height
+        let bottomSpace = view.frame.height - overallStackView.frame.origin.y - overallStackView.frame.height
         
         print(bottomSpace)
         
@@ -114,25 +130,36 @@ class RegistrationController: UIViewController {
         self.view.transform = CGAffineTransform(translationX: 0, y: -difference - 8)
     }
     
-    lazy var stackView = UIStackView(arrangedSubviews: [
+    lazy var verticalStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [
+            fullNameTextField,
+            emailTextField,
+            passwordTextField,
+            registerButton
+        ])
+        sv.axis = .vertical
+        sv.spacing = 8
+        sv.distribution = .fillEqually
+        return sv
+        
+    }()
+    
+    lazy var overallStackView = UIStackView(arrangedSubviews: [
         selectPhotoButton,
-        fullNameTextField,
-        emailTextField,
-        passwordTextField,
-        registerButton
+        verticalStackView
     ])
     
     fileprivate func setupLayout() {
-        stackView.axis = .vertical
-        stackView.spacing = 8
-        view.addSubview(stackView)
+        overallStackView.axis = .vertical
+        selectPhotoButton.widthAnchor.constraint(equalToConstant: 275).isActive = true
+        overallStackView.spacing = 8
+        view.addSubview(overallStackView)
         
-        stackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 50, bottom: 0, right: 50))
-        stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        overallStackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 50, bottom: 0, right: 50))
+        overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
     fileprivate func setupGradientLayer() {
-        let gradientLayer = CAGradientLayer()
         let topColor = UIColor(red: 253/255, green: 91/255, blue: 95/255, alpha: 1)
         let bottomColor = UIColor(red: 225/255, green: 0/255, blue: 114/255, alpha: 1)
     
