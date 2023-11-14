@@ -20,6 +20,8 @@
 		93F6BF012B0251BC00AF8EEE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F6BF002B0251BC00AF8EEE /* User.swift */; };
 		93F6BF052B025D6700AF8EEE /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F6BF042B025D6700AF8EEE /* CardViewModel.swift */; };
 		93F6BF072B0265CD00AF8EEE /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F6BF062B0265CD00AF8EEE /* Advertiser.swift */; };
+		93F6BF092B037AB500AF8EEE /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F6BF082B037AB500AF8EEE /* RegistrationController.swift */; };
+		93F6BF0B2B03905200AF8EEE /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F6BF0A2B03905200AF8EEE /* CustomTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		93F6BF002B0251BC00AF8EEE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		93F6BF042B025D6700AF8EEE /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		93F6BF062B0265CD00AF8EEE /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
+		93F6BF082B037AB500AF8EEE /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		93F6BF0A2B03905200AF8EEE /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,7 @@
 				93DB8BCA2B020DF800F741F0 /* HomeBottomControlsStackView.swift */,
 				93DB8BCC2B0229D200F741F0 /* TopNavigationStackView.swift */,
 				93DB8BCE2B02308D00F741F0 /* CardView.swift */,
+				93F6BF0A2B03905200AF8EEE /* CustomTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -115,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				93DB8BB62B01F58300F741F0 /* HomeViewController.swift */,
+				93F6BF082B037AB500AF8EEE /* RegistrationController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -205,7 +211,9 @@
 				93DB8BB32B01F58300F741F0 /* AppDelegate.swift in Sources */,
 				93DB8BCB2B020DF800F741F0 /* HomeBottomControlsStackView.swift in Sources */,
 				93F6BF012B0251BC00AF8EEE /* User.swift in Sources */,
+				93F6BF092B037AB500AF8EEE /* RegistrationController.swift in Sources */,
 				93DB8BCD2B0229D200F741F0 /* TopNavigationStackView.swift in Sources */,
+				93F6BF0B2B03905200AF8EEE /* CustomTextField.swift in Sources */,
 				93DB8BC82B0206FD00F741F0 /* Extensions+UIView.swift in Sources */,
 				93DB8BB52B01F58300F741F0 /* SceneDelegate.swift in Sources */,
 				93F6BF052B025D6700AF8EEE /* CardViewModel.swift in Sources */,
