@@ -22,6 +22,8 @@ class CardView: UIView {
                 barsStackView.addArrangedSubview(barView)
             }
             barsStackView.arrangedSubviews.first?.backgroundColor = .white
+            
+            setupImageIndexObserver()
         }
     }
     
@@ -30,7 +32,7 @@ class CardView: UIView {
     fileprivate let informationLabel = UILabel()
     fileprivate let barsStackView = UIStackView()
     let barDeselectedColor: UIColor = UIColor(white: 0, alpha: 0.1)
-    var imageIndex: Int = 0
+    //var imageIndex: Int = 0
     
     // Configurations
     fileprivate let threshold: CGFloat = 80
@@ -55,18 +57,24 @@ class CardView: UIView {
         let shouldAdvanceNextPhoto = tapLocation.x > frame.width / 2 ? true : false
         
         if shouldAdvanceNextPhoto {
-            imageIndex = min(imageIndex + 1, cardViewModel.imageNames.count - 1)
+            cardViewModel.advanceToNextPhoto()
         } else {
-            imageIndex = max(0, imageIndex - 1)
+            cardViewModel.goToPreviousePhoto()
         }
         
-        let imageName = cardViewModel.imageNames[imageIndex]
-        imageView.image = UIImage(named: imageName)
-        
-        barsStackView.arrangedSubviews.forEach { v in
-            v.backgroundColor = barDeselectedColor
-        }
-        barsStackView.arrangedSubviews[imageIndex].backgroundColor = .white
+//        if shouldAdvanceNextPhoto {
+//            imageIndex = min(imageIndex + 1, cardViewModel.imageNames.count - 1)
+//        } else {
+//            imageIndex = max(0, imageIndex - 1)
+//        }
+//        
+//        let imageName = cardViewModel.imageNames[imageIndex]
+//        imageView.image = UIImage(named: imageName)
+//        
+//        barsStackView.arrangedSubviews.forEach { v in
+//            v.backgroundColor = barDeselectedColor
+//        }
+//        barsStackView.arrangedSubviews[imageIndex].backgroundColor = .white
     }
     
     @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
@@ -81,6 +89,19 @@ class CardView: UIView {
             handleEnded(gesture: gesture)
         default:
             ()
+        }
+    }
+    
+    fileprivate func setupImageIndexObserver() {
+        cardViewModel?.imageIndexObserver = { [weak self] idx, image in
+            print("Changing photo from view model")
+            self?.imageView.image = image
+            
+            self?.barsStackView.arrangedSubviews.forEach { v in
+                v.backgroundColor = self?.barDeselectedColor
+            }
+            
+            self?.barsStackView.arrangedSubviews[idx].backgroundColor = UIColor.white
         }
     }
     
