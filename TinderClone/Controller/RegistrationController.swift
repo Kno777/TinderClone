@@ -9,13 +9,28 @@ import UIKit
 import FirebaseAuth
 import JGProgressHUD
 
+extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        let image = info[.originalImage] as? UIImage
+        
+        registrationViewModel.image = image
+        
+        self.dismiss(animated: true)
+    }
+}
+
 class RegistrationController: UIViewController {
     
     let gradientLayer = CAGradientLayer()
     let registrationViewModel = RegistrationViewModel()
 
     // UI Components
-    let selectPhotoButton: UIButton = {
+    lazy var selectPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Select Photo", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 32, weight: .heavy)
@@ -23,6 +38,9 @@ class RegistrationController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 275).isActive = true
         button.layer.cornerRadius = 16
+        button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
+        button.imageView?.contentMode = .scaleAspectFill
+        button.clipsToBounds = true
         return button
     }()
     
@@ -108,6 +126,12 @@ class RegistrationController: UIViewController {
     
     // MARK: - Functions
     
+    @objc fileprivate func handleSelectPhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true)
+    }
+    
     @objc fileprivate func handleRegister() {
         self.handleKeyboardDismiss()
         print("Register our User in Firebase Auth...")
@@ -146,6 +170,10 @@ class RegistrationController: UIViewController {
                 self?.registerButton.backgroundColor = .lightGray
                 self?.registerButton.setTitleColor(.darkGray, for: .normal)
             }
+        }
+        
+        registrationViewModel.imageObserver = { [unowned self] image in
+            self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
     }
     

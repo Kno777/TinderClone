@@ -9,6 +9,12 @@ import UIKit
 
 class RegistrationViewModel {
     
+    var image: UIImage? {
+        didSet {
+            imageObserver?(image)
+        }
+    }
+    
     var fullName: String? {
         didSet {
             checkFormValidity()
@@ -34,6 +40,8 @@ class RegistrationViewModel {
     
     // Reactive programming
     var isFormValidObserver: ((Bool) -> ())?
+    
+    var imageObserver: ((UIImage?) -> ())?
     
     
 }

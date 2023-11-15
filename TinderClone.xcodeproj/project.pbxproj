@@ -39,6 +39,7 @@
 		9319CAF02B04A78D0047BA6D /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9319CAEF2B04A78D0047BA6D /* SDWebImageMapKit */; };
 		9319CAF62B04A8890047BA6D /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 9319CAF52B04A8890047BA6D /* JGProgressHUD */; };
 		9319CAF82B04A9E00047BA6D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9319CAF72B04A9E00047BA6D /* GoogleService-Info.plist */; };
+		9319CAFA2B04B7BC0047BA6D /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9319CAF92B04B7BC0047BA6D /* Bindable.swift */; };
 		93DB8BB32B01F58300F741F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DB8BB22B01F58300F741F0 /* AppDelegate.swift */; };
 		93DB8BB52B01F58300F741F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DB8BB42B01F58300F741F0 /* SceneDelegate.swift */; };
 		93DB8BB72B01F58300F741F0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DB8BB62B01F58300F741F0 /* HomeViewController.swift */; };
@@ -59,6 +60,7 @@
 /* Begin PBXFileReference section */
 		9319CAB32B03AD490047BA6D /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		9319CAF72B04A9E00047BA6D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9319CAF92B04B7BC0047BA6D /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		93DB8BAF2B01F58300F741F0 /* TinderClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinderClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93DB8BB22B01F58300F741F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93DB8BB42B01F58300F741F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			children = (
 				93DB8BB62B01F58300F741F0 /* HomeViewController.swift */,
 				93F6BF082B037AB500AF8EEE /* RegistrationController.swift */,
+				9319CAF92B04B7BC0047BA6D /* Bindable.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				93F6BF012B0251BC00AF8EEE /* User.swift in Sources */,
 				93F6BF092B037AB500AF8EEE /* RegistrationController.swift in Sources */,
 				93DB8BCD2B0229D200F741F0 /* TopNavigationStackView.swift in Sources */,
+				9319CAFA2B04B7BC0047BA6D /* Bindable.swift in Sources */,
 				93F6BF0B2B03905200AF8EEE /* CustomTextField.swift in Sources */,
 				9319CAB42B03AD490047BA6D /* RegistrationViewModel.swift in Sources */,
 				93DB8BC82B0206FD00F741F0 /* Extensions+UIView.swift in Sources */,
