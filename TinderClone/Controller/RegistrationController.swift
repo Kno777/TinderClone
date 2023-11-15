@@ -18,7 +18,9 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
         
         let image = info[.originalImage] as? UIImage
         
-        registrationViewModel.image = image
+        registrationViewModel.bindableImage.value = image
+        
+//        registrationViewModel.image = image
         
         self.dismiss(animated: true)
     }
@@ -159,7 +161,10 @@ class RegistrationController: UIViewController {
     }
     
     fileprivate func setupRegistrationViewModelObserver() {
-        registrationViewModel.isFormValidObserver = { [weak self] isFormValid in
+        
+        registrationViewModel.bindableIsFormValid.bind { [weak self] isFormValid in
+            
+            guard let isFormValid = isFormValid else { return }
             
             self?.registerButton.isEnabled = isFormValid
             
@@ -172,7 +177,24 @@ class RegistrationController: UIViewController {
             }
         }
         
-        registrationViewModel.imageObserver = { [unowned self] image in
+//        registrationViewModel.isFormValidObserver = { [weak self] isFormValid in
+//            
+//            self?.registerButton.isEnabled = isFormValid
+//            
+//            if isFormValid {
+//                self?.registerButton.backgroundColor = UIColor(red: 253/255, green: 91/255, blue: 95/255, alpha: 1)
+//                self?.registerButton.setTitleColor(.white, for: .normal)
+//            } else {
+//                self?.registerButton.backgroundColor = .lightGray
+//                self?.registerButton.setTitleColor(.darkGray, for: .normal)
+//            }
+//        }
+        
+//        registrationViewModel.imageObserver = { [unowned self] image in
+//            self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+//        }
+        
+        registrationViewModel.bindableImage.bind { [unowned self] image in
             self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
     }

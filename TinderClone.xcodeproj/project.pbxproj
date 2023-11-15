@@ -121,6 +121,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9319CAFB2B04B8C30047BA6D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9319CAF92B04B7BC0047BA6D /* Bindable.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		93DB8BA62B01F58300F741F0 = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +148,7 @@
 		93DB8BB12B01F58300F741F0 /* TinderClone */ = {
 			isa = PBXGroup;
 			children = (
+				9319CAFB2B04B8C30047BA6D /* Helpers */,
 				93F6BF032B025D5100AF8EEE /* ViewModels */,
 				93F6BF022B025B2900AF8EEE /* Controller */,
 				93F6BEFF2B0251AE00AF8EEE /* Model */,
@@ -188,7 +197,6 @@
 			children = (
 				93DB8BB62B01F58300F741F0 /* HomeViewController.swift */,
 				93F6BF082B037AB500AF8EEE /* RegistrationController.swift */,
-				9319CAF92B04B7BC0047BA6D /* Bindable.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
