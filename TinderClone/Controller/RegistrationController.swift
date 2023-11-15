@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import JGProgressHUD
 
 class RegistrationController: UIViewController {
     
@@ -50,7 +52,7 @@ class RegistrationController: UIViewController {
         return tf
     }()
     
-    let registerButton: UIButton = {
+    lazy var registerButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Register", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -63,6 +65,8 @@ class RegistrationController: UIViewController {
         
         button.heightAnchor.constraint(equalToConstant: 44).isActive = true
         button.layer.cornerRadius = 22
+        
+        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
         return button
     }()
     
@@ -103,6 +107,32 @@ class RegistrationController: UIViewController {
     
     
     // MARK: - Functions
+    
+    @objc fileprivate func handleRegister() {
+        self.handleKeyboardDismiss()
+        print("Register our User in Firebase Auth...")
+        
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { res, err in
+            if let err = err {
+                print(err)
+                self.showHUDWithError(error: err)
+                return
+            }
+            
+            print("Successfully registered user: ", res?.user.uid ?? "")
+        }
+    }
+    
+    fileprivate func showHUDWithError(error: Error) {
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Failed registration"
+        hud.detailTextLabel.text = error.localizedDescription
+        hud.show(in: self.view)
+        hud.dismiss(afterDelay: 4)
+    }
     
     fileprivate func setupRegistrationViewModelObserver() {
         registrationViewModel.isFormValidObserver = { [weak self] isFormValid in
