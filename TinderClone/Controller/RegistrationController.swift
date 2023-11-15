@@ -7,29 +7,14 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseStorage
 import JGProgressHUD
-
-extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        self.dismiss(animated: true)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        let image = info[.originalImage] as? UIImage
-        
-        registrationViewModel.bindableImage.value = image
-        
-//        registrationViewModel.image = image
-        
-        self.dismiss(animated: true)
-    }
-}
 
 class RegistrationController: UIViewController {
     
     let gradientLayer = CAGradientLayer()
     let registrationViewModel = RegistrationViewModel()
+    let registerHUD = JGProgressHUD(style: .dark)
 
     // UI Components
     lazy var selectPhotoButton: UIButton = {
@@ -124,8 +109,6 @@ class RegistrationController: UIViewController {
         setupRegistrationViewModelObserver()
     }
     
-    
-    
     // MARK: - Functions
     
     @objc fileprivate func handleSelectPhoto() {
@@ -138,21 +121,22 @@ class RegistrationController: UIViewController {
         self.handleKeyboardDismiss()
         print("Register our User in Firebase Auth...")
         
-        guard let email = emailTextField.text else { return }
-        guard let password = passwordTextField.text else { return }
+        registrationViewModel.bindableIsRegistering.value = true
         
-        Auth.auth().createUser(withEmail: email, password: password) { res, err in
+        registrationViewModel.preformRegistration { [weak self] err in
             if let err = err {
-                print(err)
-                self.showHUDWithError(error: err)
+                self?.showHUDWithError(error: err)
                 return
             }
             
-            print("Successfully registered user: ", res?.user.uid ?? "")
+            print("Finished registering our user...")
         }
     }
     
     fileprivate func showHUDWithError(error: Error) {
+        
+        registerHUD.dismiss(animated: true)
+        
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Failed registration"
         hud.detailTextLabel.text = error.localizedDescription
@@ -177,25 +161,17 @@ class RegistrationController: UIViewController {
             }
         }
         
-//        registrationViewModel.isFormValidObserver = { [weak self] isFormValid in
-//            
-//            self?.registerButton.isEnabled = isFormValid
-//            
-//            if isFormValid {
-//                self?.registerButton.backgroundColor = UIColor(red: 253/255, green: 91/255, blue: 95/255, alpha: 1)
-//                self?.registerButton.setTitleColor(.white, for: .normal)
-//            } else {
-//                self?.registerButton.backgroundColor = .lightGray
-//                self?.registerButton.setTitleColor(.darkGray, for: .normal)
-//            }
-//        }
-        
-//        registrationViewModel.imageObserver = { [unowned self] image in
-//            self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
-//        }
-        
         registrationViewModel.bindableImage.bind { [unowned self] image in
             self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        
+        registrationViewModel.bindableIsRegistering.bind { [unowned self] isRegistering in
+            if isRegistering == true {
+                registerHUD.textLabel.text = "Register"
+                registerHUD.show(in: self.view)
+            } else {
+                registerHUD.dismiss()
+            }
         }
     }
     
@@ -291,5 +267,20 @@ class RegistrationController: UIViewController {
         gradientLayer.frame = view.bounds
         
         view.layer.addSublayer(gradientLayer)
+    }
+}
+
+extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        let image = info[.originalImage] as? UIImage
+        
+        registrationViewModel.bindableImage.value = image
+                
+        self.dismiss(animated: true)
     }
 }
