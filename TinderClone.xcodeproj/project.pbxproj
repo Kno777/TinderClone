@@ -42,6 +42,9 @@
 		9319CAFF2B04D8D20047BA6D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9319CAFE2B04D8D20047BA6D /* GoogleService-Info.plist */; };
 		938FDCAA2B06064200DE80DB /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938FDCA92B06064200DE80DB /* SettingsController.swift */; };
 		938FDCAC2B060E8A00DE80DB /* CustomImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938FDCAB2B060E8A00DE80DB /* CustomImagePickerController.swift */; };
+		938FDCAE2B06174A00DE80DB /* HeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938FDCAD2B06174A00DE80DB /* HeaderLabel.swift */; };
+		938FDCB02B06177B00DE80DB /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938FDCAF2B06177B00DE80DB /* SettingsTableViewCell.swift */; };
+		938FDCB22B0619C500DE80DB /* SettingsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938FDCB12B0619C500DE80DB /* SettingsTextField.swift */; };
 		93DB8BB32B01F58300F741F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DB8BB22B01F58300F741F0 /* AppDelegate.swift */; };
 		93DB8BB52B01F58300F741F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DB8BB42B01F58300F741F0 /* SceneDelegate.swift */; };
 		93DB8BB72B01F58300F741F0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DB8BB62B01F58300F741F0 /* HomeViewController.swift */; };
@@ -65,6 +68,9 @@
 		9319CAFE2B04D8D20047BA6D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		938FDCA92B06064200DE80DB /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		938FDCAB2B060E8A00DE80DB /* CustomImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImagePickerController.swift; sourceTree = "<group>"; };
+		938FDCAD2B06174A00DE80DB /* HeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderLabel.swift; sourceTree = "<group>"; };
+		938FDCAF2B06177B00DE80DB /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		938FDCB12B0619C500DE80DB /* SettingsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextField.swift; sourceTree = "<group>"; };
 		93DB8BAF2B01F58300F741F0 /* TinderClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinderClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93DB8BB22B01F58300F741F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93DB8BB42B01F58300F741F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +139,17 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		938FDCB32B0619CD00DE80DB /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				938FDCB12B0619C500DE80DB /* SettingsTextField.swift */,
+				938FDCAD2B06174A00DE80DB /* HeaderLabel.swift */,
+				938FDCAB2B060E8A00DE80DB /* CustomImagePickerController.swift */,
+				93F6BF0A2B03905200AF8EEE /* CustomTextField.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		93DB8BA62B01F58300F741F0 = {
 			isa = PBXGroup;
 			children = (
@@ -180,11 +197,11 @@
 		93DB8BC92B020DC400F741F0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				938FDCB32B0619CD00DE80DB /* CustomViews */,
 				93DB8BCA2B020DF800F741F0 /* HomeBottomControlsStackView.swift */,
 				93DB8BCC2B0229D200F741F0 /* TopNavigationStackView.swift */,
 				93DB8BCE2B02308D00F741F0 /* CardView.swift */,
-				93F6BF0A2B03905200AF8EEE /* CustomTextField.swift */,
-				938FDCAB2B060E8A00DE80DB /* CustomImagePickerController.swift */,
+				938FDCAF2B06177B00DE80DB /* SettingsTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -329,11 +346,13 @@
 			files = (
 				93F6BF072B0265CD00AF8EEE /* Advertiser.swift in Sources */,
 				93DB8BCF2B02308D00F741F0 /* CardView.swift in Sources */,
+				938FDCB02B06177B00DE80DB /* SettingsTableViewCell.swift in Sources */,
 				93DB8BB72B01F58300F741F0 /* HomeViewController.swift in Sources */,
 				93DB8BB32B01F58300F741F0 /* AppDelegate.swift in Sources */,
 				938FDCAC2B060E8A00DE80DB /* CustomImagePickerController.swift in Sources */,
 				93DB8BCB2B020DF800F741F0 /* HomeBottomControlsStackView.swift in Sources */,
 				93F6BF012B0251BC00AF8EEE /* User.swift in Sources */,
+				938FDCAE2B06174A00DE80DB /* HeaderLabel.swift in Sources */,
 				938FDCAA2B06064200DE80DB /* SettingsController.swift in Sources */,
 				93F6BF092B037AB500AF8EEE /* RegistrationController.swift in Sources */,
 				93DB8BCD2B0229D200F741F0 /* TopNavigationStackView.swift in Sources */,
@@ -343,6 +362,7 @@
 				93DB8BC82B0206FD00F741F0 /* Extensions+UIView.swift in Sources */,
 				93DB8BB52B01F58300F741F0 /* SceneDelegate.swift in Sources */,
 				93F6BF052B025D6700AF8EEE /* CardViewModel.swift in Sources */,
+				938FDCB22B0619C500DE80DB /* SettingsTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
