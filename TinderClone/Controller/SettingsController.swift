@@ -60,6 +60,8 @@ class SettingsController: UITableViewController {
             
             self.image1Button.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
+        
+        //self.user?.imageUrl1 = imageUrl
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -69,19 +71,28 @@ class SettingsController: UITableViewController {
         case 1:
             cell.textField.placeholder = "Enter name"
             cell.textField.text = self.user?.name ?? ""
+            cell.textField.addTarget(self, action: #selector(handleNameChange), for: .editingChanged)
+            cell.textField.keyboardType = .default
         case 2:
             cell.textField.placeholder = "Enter profession"
             cell.textField.text = self.user?.profession ?? ""
+            cell.textField.addTarget(self, action: #selector(handleProfessionChange), for: .editingChanged)
+            cell.textField.keyboardType = .default
         case 3:
             cell.textField.placeholder = "Enter age"
+            cell.textField.keyboardType = .phonePad
             if let age = self.user?.age {
                 cell.textField.text = "\(age)"
             }
+            cell.textField.addTarget(self, action: #selector(handleAgeChange), for: .editingChanged)
         default:
             cell.textField.placeholder = "Enter bio"
+            cell.textField.text = self.user?.bio
+            cell.textField.addTarget(self, action: #selector(handleBioChange), for: .editingChanged)
+            cell.textField.keyboardType = .default
         }
         
-        return cell
+        return cell // xndir ka petqa poxvi functioneri kanchelu logice addTargeti het em
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -121,6 +132,22 @@ class SettingsController: UITableViewController {
         return 40
     }
     
+    @objc fileprivate func handleNameChange(textField: UITextField) {
+        self.user?.name = textField.text
+    }
+    
+    @objc fileprivate func handleProfessionChange(textField: UITextField) {
+        self.user?.profession = textField.text
+    }
+    
+    @objc fileprivate func handleAgeChange(textField: UITextField) {
+        self.user?.age = Int(textField.text ?? "0")
+    }
+    
+    @objc fileprivate func handleBioChange(textField: UITextField) {
+        self.user?.bio = textField.text
+    }
+    
     @objc fileprivate func handleSelectPhoto(button: UIButton) {
         let imagePicker = CustomImagePickerController()
         imagePicker.delegate = self
@@ -137,7 +164,32 @@ class SettingsController: UITableViewController {
     }
     
     @objc fileprivate func handleSave() {
-        self.dismiss(animated: true)
+        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Saving Settings"
+        hud.show(in: self.view)
+        
+        let docData: [String: Any] = [
+            "uid": uid,
+            "fullName": self.user?.name ?? "",
+            "imageUrl1": self.user?.imageUrl1 ?? "",
+            "age": self.user?.age ?? 0,
+            "profession": self.user?.profession ?? "",
+            "bio": self.user?.bio ?? ""
+        ]
+        
+        Firestore.firestore().collection("users").document(uid).setData(docData) { err in
+            hud.dismiss()
+            
+            if let err = err {
+                print("Failed to save user settings:", err)
+                return
+            }
+            
+            print("Finished saving user info")
+        }
     }
     
     fileprivate func setupNavigationItems() {
