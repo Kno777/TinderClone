@@ -31,8 +31,10 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func handleSettings() {
-        let registrationController = RegistrationController()
-        self.present(registrationController, animated: true)
+        let settingsController = SettingsController()
+        let navControler = UINavigationController(rootViewController: settingsController)
+        navControler.modalPresentationStyle = .fullScreen
+        self.present(navControler, animated: true)
     }
 
     // MARK: - Fileprivate functions
