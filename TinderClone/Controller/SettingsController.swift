@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import Firebase
+import JGProgressHUD
+import SDWebImage
 
 class SettingsController: UITableViewController {
 
@@ -13,6 +16,8 @@ class SettingsController: UITableViewController {
     lazy var image1Button = createButton(selector: #selector(handleSelectPhoto))
     lazy var image2Button = createButton(selector: #selector(handleSelectPhoto))
     lazy var image3Button = createButton(selector: #selector(handleSelectPhoto))
+    
+    var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +27,39 @@ class SettingsController: UITableViewController {
         tableView.tableFooterView = UIView()
         tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: "cellID")
         tableView.keyboardDismissMode = .interactive
+        
+        fetchCurrentUser()
+    }
+    
+    fileprivate func fetchCurrentUser() {
+        // fetch user from Firestore
+        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        Firestore.firestore().collection("users").document(uid).getDocument { [weak self] snapshot, err in
+            if let err = err {
+                print(err)
+                return
+            }
+            
+            // fetched our user here
+            guard let dictionary = snapshot?.data() else { return }
+            let user = User(dictionary: dictionary)
+            self?.user = user
+            
+            self?.loadUserPhotos()
+            
+            self?.tableView.reloadData()
+        }
+    }
+    
+    fileprivate func loadUserPhotos() {
+        guard let imageUrl = self.user?.imageUrl1, let url = URL(string: imageUrl) else { return }
+        
+        SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { image, _, _, _, _, _ in
+            
+            self.image1Button.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -30,10 +68,15 @@ class SettingsController: UITableViewController {
         switch indexPath.section {
         case 1:
             cell.textField.placeholder = "Enter name"
+            cell.textField.text = self.user?.name ?? ""
         case 2:
             cell.textField.placeholder = "Enter profession"
+            cell.textField.text = self.user?.profession ?? ""
         case 3:
             cell.textField.placeholder = "Enter age"
+            if let age = self.user?.age {
+                cell.textField.text = "\(age)"
+            }
         default:
             cell.textField.placeholder = "Enter bio"
         }
