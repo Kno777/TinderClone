@@ -27,6 +27,7 @@ class SettingsController: UITableViewController {
         tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         tableView.tableFooterView = UIView()
         tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: "cellID")
+        tableView.register(AgeRangeCell.self, forCellReuseIdentifier: "ageCellId")
         tableView.keyboardDismissMode = .interactive
         
         fetchCurrentUser()
@@ -80,35 +81,72 @@ class SettingsController: UITableViewController {
         //self.user?.imageUrl1 = imageUrl
     }
     
+    @objc fileprivate func handleMinAgeChange(slider: UISlider) {
+        print(slider.value)
+        
+        let indexPath = IndexPath(row: 0, section: 5)
+        let ageRangeCell = tableView.cellForRow(at: indexPath) as! AgeRangeCell
+        ageRangeCell.minLabel.text = "Min \(Int(slider.value))"
+        
+        self.user?.minSeekingAge = Int(slider.value)
+    }
+    
+    @objc fileprivate func handleMaxAgeChange(slider: UISlider) {
+        print(slider.value)
+        
+        let indexPath = IndexPath(row: 0, section: 5)
+        let ageRangeCell = tableView.cellForRow(at: indexPath) as! AgeRangeCell
+        ageRangeCell.maxLabel.text = "Max \(Int(slider.value))"
+        
+        self.user?.maxSeekingAge = Int(slider.value)
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath) as! SettingsTableViewCell
         
-        switch indexPath.section {
-        case 1:
-            cell.textField.placeholder = "Enter name"
-            cell.textField.text = self.user?.name ?? ""
-            cell.textField.addTarget(self, action: #selector(handleNameChange), for: .editingChanged)
-            cell.textField.keyboardType = .default
-        case 2:
-            cell.textField.placeholder = "Enter profession"
-            cell.textField.text = self.user?.profession ?? ""
-            cell.textField.addTarget(self, action: #selector(handleProfessionChange), for: .editingChanged)
-            cell.textField.keyboardType = .default
-        case 3:
-            cell.textField.placeholder = "Enter age"
-            cell.textField.keyboardType = .phonePad
-            if let age = self.user?.age {
-                cell.textField.text = "\(age)"
+        if indexPath.section == 5 {
+            let ageRangeCell = tableView.dequeueReusableCell(withIdentifier: "ageCellId", for: indexPath) as! AgeRangeCell
+            
+            ageRangeCell.minSlider.addTarget(self, action: #selector(handleMinAgeChange), for: .valueChanged)
+            ageRangeCell.maxSlider.addTarget(self, action: #selector(handleMaxAgeChange), for: .valueChanged)
+            
+            ageRangeCell.minLabel.text = "Min \(user?.minSeekingAge ?? -1)"
+            ageRangeCell.maxLabel.text = "Max \(user?.maxSeekingAge ?? -1)"
+            
+            return ageRangeCell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath) as! SettingsTableViewCell
+            
+            switch indexPath.section {
+            case 1:
+                cell.textField.placeholder = "Enter name"
+                cell.textField.text = self.user?.name ?? ""
+                cell.textField.addTarget(self, action: #selector(handleNameChange), for: .editingChanged)
+                cell.textField.keyboardType = .default
+            case 2:
+                cell.textField.placeholder = "Enter profession"
+                cell.textField.text = self.user?.profession ?? ""
+                cell.textField.addTarget(self, action: #selector(handleProfessionChange), for: .editingChanged)
+                cell.textField.keyboardType = .default
+            case 3:
+                cell.textField.placeholder = "Enter age"
+                cell.textField.keyboardType = .phonePad
+                if let age = self.user?.age {
+                    cell.textField.text = "\(age)"
+                }
+                cell.textField.addTarget(self, action: #selector(handleAgeChange), for: .editingChanged)
+            default:
+                cell.textField.placeholder = "Enter bio"
+                cell.textField.text = self.user?.bio
+                cell.textField.addTarget(self, action: #selector(handleBioChange), for: .editingChanged)
+                cell.textField.keyboardType = .default
             }
-            cell.textField.addTarget(self, action: #selector(handleAgeChange), for: .editingChanged)
-        default:
-            cell.textField.placeholder = "Enter bio"
-            cell.textField.text = self.user?.bio
-            cell.textField.addTarget(self, action: #selector(handleBioChange), for: .editingChanged)
-            cell.textField.keyboardType = .default
+            
+            return cell
         }
-        
-        return cell // xndir ka petqa poxvi functioneri kanchelu logice addTargeti het em
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return indexPath.section == 5 ? 100 : 50
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -116,7 +154,7 @@ class SettingsController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 6
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -126,6 +164,7 @@ class SettingsController: UITableViewController {
         }
         
         let headerLabel = HeaderLabel()
+        headerLabel.font = .boldSystemFont(ofSize: 16)
         
         switch section {
         case 1:
@@ -134,8 +173,10 @@ class SettingsController: UITableViewController {
             headerLabel.text = "Profession"
         case 3:
             headerLabel.text = "Age"
-        default:
+        case 4:
             headerLabel.text = "Bio"
+        default:
+            headerLabel.text = "Seeking Age Range"
         }
         
         return headerLabel
@@ -195,7 +236,9 @@ class SettingsController: UITableViewController {
             "imageUrl3": self.user?.imageUrl3 ?? "",
             "age": self.user?.age ?? 0,
             "profession": self.user?.profession ?? "",
-            "bio": self.user?.bio ?? ""
+            "bio": self.user?.bio ?? "",
+            "minSeekingAge": self.user?.minSeekingAge ?? -1,
+            "maxSeekingAge": self.user?.maxSeekingAge ?? -1
         ]
         
         Firestore.firestore().collection("users").document(uid).setData(docData) { err in

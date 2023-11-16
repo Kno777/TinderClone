@@ -45,6 +45,8 @@
 		938FDCAE2B06174A00DE80DB /* HeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938FDCAD2B06174A00DE80DB /* HeaderLabel.swift */; };
 		938FDCB02B06177B00DE80DB /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938FDCAF2B06177B00DE80DB /* SettingsTableViewCell.swift */; };
 		938FDCB22B0619C500DE80DB /* SettingsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938FDCB12B0619C500DE80DB /* SettingsTextField.swift */; };
+		938FDCB52B063F2200DE80DB /* AgeRangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938FDCB42B063F2200DE80DB /* AgeRangeCell.swift */; };
+		938FDCB72B066B0400DE80DB /* AgeRangeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938FDCB62B066B0400DE80DB /* AgeRangeLabel.swift */; };
 		93DB8BB32B01F58300F741F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DB8BB22B01F58300F741F0 /* AppDelegate.swift */; };
 		93DB8BB52B01F58300F741F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DB8BB42B01F58300F741F0 /* SceneDelegate.swift */; };
 		93DB8BB72B01F58300F741F0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DB8BB62B01F58300F741F0 /* HomeViewController.swift */; };
@@ -71,6 +73,8 @@
 		938FDCAD2B06174A00DE80DB /* HeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderLabel.swift; sourceTree = "<group>"; };
 		938FDCAF2B06177B00DE80DB /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		938FDCB12B0619C500DE80DB /* SettingsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextField.swift; sourceTree = "<group>"; };
+		938FDCB42B063F2200DE80DB /* AgeRangeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeRangeCell.swift; sourceTree = "<group>"; };
+		938FDCB62B066B0400DE80DB /* AgeRangeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeRangeLabel.swift; sourceTree = "<group>"; };
 		93DB8BAF2B01F58300F741F0 /* TinderClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinderClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93DB8BB22B01F58300F741F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93DB8BB42B01F58300F741F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 				938FDCAD2B06174A00DE80DB /* HeaderLabel.swift */,
 				938FDCAB2B060E8A00DE80DB /* CustomImagePickerController.swift */,
 				93F6BF0A2B03905200AF8EEE /* CustomTextField.swift */,
+				938FDCB62B066B0400DE80DB /* AgeRangeLabel.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -202,6 +207,7 @@
 				93DB8BCC2B0229D200F741F0 /* TopNavigationStackView.swift */,
 				93DB8BCE2B02308D00F741F0 /* CardView.swift */,
 				938FDCAF2B06177B00DE80DB /* SettingsTableViewCell.swift */,
+				938FDCB42B063F2200DE80DB /* AgeRangeCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -359,6 +365,8 @@
 				9319CAFA2B04B7BC0047BA6D /* Bindable.swift in Sources */,
 				93F6BF0B2B03905200AF8EEE /* CustomTextField.swift in Sources */,
 				9319CAB42B03AD490047BA6D /* RegistrationViewModel.swift in Sources */,
+				938FDCB72B066B0400DE80DB /* AgeRangeLabel.swift in Sources */,
+				938FDCB52B063F2200DE80DB /* AgeRangeCell.swift in Sources */,
 				93DB8BC82B0206FD00F741F0 /* Extensions+UIView.swift in Sources */,
 				93DB8BB52B01F58300F741F0 /* SceneDelegate.swift in Sources */,
 				93F6BF052B025D6700AF8EEE /* CardViewModel.swift in Sources */,
