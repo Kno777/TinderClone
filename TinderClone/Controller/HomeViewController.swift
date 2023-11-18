@@ -9,7 +9,11 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
-class HomeViewController: UIViewController, SettingsControllerDelegate {
+class HomeViewController: UIViewController, SettingsControllerDelegate, LoginControllerDelegate {
+    func didFinishLoggingIn() {
+        self.fetchCurrentUser()
+    }
+    
     
     func didSaveSettings() {
         self.fetchCurrentUser()
@@ -25,6 +29,18 @@ class HomeViewController: UIViewController, SettingsControllerDelegate {
     private var user: User?
     
     var cardViewModels = [CardViewModel]() // empty array
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if Auth.auth().currentUser == nil {
+            let loginController = LoginController()
+            loginController.delegate = self
+            let navController = UINavigationController(rootViewController: loginController)
+            navController.modalPresentationStyle = .fullScreen
+            present(navController, animated: true)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,9 +67,15 @@ class HomeViewController: UIViewController, SettingsControllerDelegate {
     // MARK: - Fileprivate functions
     
     fileprivate func fetchCurrentUser() {
+        
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Loading..."
+        hud.show(in: self.view)
+        
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         Firestore.firestore().collection("users").document(uid).getDocument { [weak self] snapshot, err in
+            hud.dismiss()
             if let err = err {
                 print(err)
                 return

@@ -222,6 +222,7 @@ class SettingsController: UITableViewController {
     }
     
     @objc fileprivate func handleLogout() {
+        try? Auth.auth().signOut()
         self.dismiss(animated: true)
     }
     

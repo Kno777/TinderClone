@@ -32,7 +32,7 @@ class RegistrationController: UIViewController {
     }()
     
     lazy var fullNameTextField: CustomTextField = {
-       let tf = CustomTextField(padding: 16)
+       let tf = CustomTextField(padding: 16, height: 50)
         tf.placeholder = "Enter full name"
         tf.backgroundColor = .white
         tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
@@ -40,7 +40,7 @@ class RegistrationController: UIViewController {
     }()
     
     lazy var emailTextField: CustomTextField = {
-       let tf = CustomTextField(padding: 16)
+       let tf = CustomTextField(padding: 16, height: 50)
         tf.placeholder = "Enter email"
         tf.keyboardType = .emailAddress
         tf.backgroundColor = .white
@@ -49,7 +49,7 @@ class RegistrationController: UIViewController {
     }()
     
     lazy var passwordTextField: CustomTextField = {
-       let tf = CustomTextField(padding: 16)
+       let tf = CustomTextField(padding: 16, height: 50)
         tf.placeholder = "Enter password"
         tf.isSecureTextEntry = true
         tf.backgroundColor = .white
@@ -247,6 +247,20 @@ class RegistrationController: UIViewController {
         verticalStackView
     ])
     
+    lazy var goToLoginButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Go To Login", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .heavy)
+        button.addTarget(self, action: #selector(handleGoToLogin), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc fileprivate func handleGoToLogin() {
+        let loginController = LoginController()
+        navigationController?.pushViewController(loginController, animated: true)
+    }
+    
     fileprivate func setupLayout() {
         overallStackView.axis = .vertical
         selectPhotoButton.widthAnchor.constraint(equalToConstant: 275).isActive = true
@@ -255,6 +269,9 @@ class RegistrationController: UIViewController {
         
         overallStackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 50, bottom: 0, right: 50))
         overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        view.addSubview(goToLoginButton)
+        goToLoginButton.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 0, left: 16, bottom: 16, right: 16))
     }
     
     fileprivate func setupGradientLayer() {
