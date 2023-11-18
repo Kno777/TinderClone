@@ -11,6 +11,10 @@ import JGProgressHUD
 import SDWebImage
 import FirebaseStorage
 
+protocol SettingsControllerDelegate: AnyObject {
+    func didSaveSettings()
+}
+
 class SettingsController: UITableViewController {
 
     // instance properties
@@ -19,6 +23,7 @@ class SettingsController: UITableViewController {
     lazy var image3Button = createButton(selector: #selector(handleSelectPhoto))
     
     var user: User?
+    weak var delegate: SettingsControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -250,6 +255,10 @@ class SettingsController: UITableViewController {
             }
             
             print("Finished saving user info")
+            
+            self.dismiss(animated: true) {
+                self.delegate?.didSaveSettings()
+            }
         }
     }
     
