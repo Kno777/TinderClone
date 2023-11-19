@@ -8,7 +8,13 @@
 import UIKit
 import SDWebImage
 
+protocol CardViewDelegate: AnyObject {
+    func didTapMoreInfo()
+}
+
 class CardView: UIView {
+    
+    weak var delegate: CardViewDelegate?
     
     var cardViewModel: CardViewModel? {
         didSet {
@@ -117,6 +123,29 @@ class CardView: UIView {
         }
     }
     
+    lazy var moreInfoButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .white
+        button.setImage(UIImage(systemName: "info")?.withRenderingMode(.alwaysOriginal).withTintColor(.black), for: .normal)
+        button.layer.cornerRadius = 44 / 2
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(handleMoreInfoButton), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc fileprivate func handleMoreInfoButton() {
+        print("handleMoreInfoButton")
+        
+//        let rootViewController = UIApplication.shared.connectedScenes
+//                .filter({$0.activationState == .foregroundActive})
+//                .compactMap({$0 as? UIWindowScene})
+//                .first?.windows
+//                .filter({$0.isKeyWindow}).first?.rootViewController
+        
+        self.delegate?.didTapMoreInfo()
+
+    }
+    
     fileprivate func setupLayout() {
         // custom drawing code
         layer.cornerRadius = 10
@@ -137,6 +166,10 @@ class CardView: UIView {
         informationLabel.font = .boldSystemFont(ofSize: 34)
         informationLabel.numberOfLines = 0
         informationLabel.textColor = .white
+        
+        addSubview(moreInfoButton)
+        
+        moreInfoButton.anchor(top: nil, leading: nil, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 16, right: 16), size: .init(width: 44, height: 44))
     }
     
     fileprivate func setupBarsStackView() {
