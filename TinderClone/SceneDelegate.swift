@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: scene)
         window?.makeKeyAndVisible()
-        window?.rootViewController = SwipingPhotosVController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+        window?.rootViewController = HomeViewController()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -15,9 +15,7 @@ class UserDetailController: UIViewController {
             guard let cardViewModel = cardViewModel else { return }
             infoLabel.attributedText = cardViewModel.attributedString
             
-            guard let firstImageUrl = cardViewModel.imageUrls.first, let url = URL(string: firstImageUrl) else { return }
-            
-            imageView.sd_setImage(with: url)
+            swipingPhotosController.cardViewModel = cardViewModel
         }
     }
     
@@ -29,13 +27,10 @@ class UserDetailController: UIViewController {
         return scroll
     }()
     
-    private lazy var imageView: UIImageView = {
-        let iv = UIImageView()
-        iv.image = UIImage(named: "jane1")
-        iv.contentMode = .scaleAspectFill
-        iv.clipsToBounds = true
-        return iv
-    }()
+    private let swipingPhotosController = SwipingPhotosVController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+    
+
+    let extraSwipingHeight: CGFloat = 80
     
     private lazy var infoLabel: UILabel = {
         let label = UILabel()
@@ -65,6 +60,13 @@ class UserDetailController: UIViewController {
         button.addTarget(self, action: selector, for: .touchUpInside)
         button.contentMode = .scaleAspectFill
         return button
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let swipingView = swipingPhotosController.view!
+        swipingView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width + extraSwipingHeight)
     }
     
     override func viewDidLoad() {
@@ -111,17 +113,18 @@ class UserDetailController: UIViewController {
         
         scrollView.fillSuperview()
         
-        scrollView.addSubview(imageView)
+        let swipingView = swipingPhotosController.view!
         
-        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width)
+        scrollView.addSubview(swipingView)
         
+       
         scrollView.addSubview(infoLabel)
-        infoLabel.anchor(top: imageView.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 16, left: 16, bottom: 0, right: 16))
+        infoLabel.anchor(top: swipingView.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 16, left: 16, bottom: 0, right: 16))
         
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapDissmis)))
         
         scrollView.addSubview(dissmisButton)
-        dissmisButton.anchor(top: imageView.bottomAnchor, leading: nil, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: -25, left: 0, bottom: 0, right: 16), size: .init(width: 50, height: 50))
+        dissmisButton.anchor(top: swipingView.bottomAnchor, leading: nil, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: -25, left: 0, bottom: 0, right: 16), size: .init(width: 50, height: 50))
     }
     
     @objc fileprivate func handleTapDissmis(gesture: UITapGestureRecognizer) {
@@ -141,6 +144,7 @@ extension UserDetailController: UIScrollViewDelegate {
         var width = view.frame.width + changeY * 2
         width = max(view.frame.width, width)
         
-        imageView.frame = CGRect(x: min(0, -changeY), y: min(0, -changeY), width: width, height: width)
+        let swipingView = swipingPhotosController.view!
+        swipingView.frame = CGRect(x: min(0, -changeY), y: min(0, -changeY), width: width, height: width + extraSwipingHeight)
     }
 }
