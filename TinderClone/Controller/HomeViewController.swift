@@ -11,8 +11,8 @@ import JGProgressHUD
 
 class HomeViewController: UIViewController, SettingsControllerDelegate, LoginControllerDelegate, CardViewDelegate {
     func didTapMoreInfo() {
-        print("ss")
         let userDetailController = UserDetailController()
+        userDetailController.modalPresentationStyle = .fullScreen
         present(userDetailController, animated: true)
     }
     
