@@ -10,8 +10,10 @@ import Firebase
 import JGProgressHUD
 
 class HomeViewController: UIViewController, SettingsControllerDelegate, LoginControllerDelegate, CardViewDelegate {
-    func didTapMoreInfo() {
+    
+    func didTapMoreInfo(cardViewModel: CardViewModel) {
         let userDetailController = UserDetailController()
+        userDetailController.cardViewModel = cardViewModel
         userDetailController.modalPresentationStyle = .fullScreen
         present(userDetailController, animated: true)
     }

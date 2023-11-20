@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 
 protocol CardViewDelegate: AnyObject {
-    func didTapMoreInfo()
+    func didTapMoreInfo(cardViewModel: CardViewModel)
 }
 
 class CardView: UIView {
@@ -20,7 +20,7 @@ class CardView: UIView {
         didSet {
             guard let cardViewModel = cardViewModel else { return }
             
-            let imageName = cardViewModel.imageNames.first ?? ""
+            let imageName = cardViewModel.imageUrls.first ?? ""
             // load our image using some kind of url instead
             
             if let url = URL(string: imageName) {
@@ -31,7 +31,7 @@ class CardView: UIView {
             informationLabel.attributedText = cardViewModel.attributedString
             informationLabel.textAlignment = cardViewModel.textAlignment
             
-            (0..<cardViewModel.imageNames.count).forEach { _ in
+            (0..<cardViewModel.imageUrls.count).forEach { _ in
                 let barView = UIView()
                 barView.backgroundColor = barDeselectedColor
                 barsStackView.addArrangedSubview(barView)
@@ -76,20 +76,6 @@ class CardView: UIView {
         } else {
             cardViewModel.goToPreviousePhoto()
         }
-        
-//        if shouldAdvanceNextPhoto {
-//            imageIndex = min(imageIndex + 1, cardViewModel.imageNames.count - 1)
-//        } else {
-//            imageIndex = max(0, imageIndex - 1)
-//        }
-//        
-//        let imageName = cardViewModel.imageNames[imageIndex]
-//        imageView.image = UIImage(named: imageName)
-//        
-//        barsStackView.arrangedSubviews.forEach { v in
-//            v.backgroundColor = barDeselectedColor
-//        }
-//        barsStackView.arrangedSubviews[imageIndex].backgroundColor = .white
     }
     
     @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
@@ -136,13 +122,8 @@ class CardView: UIView {
     @objc fileprivate func handleMoreInfoButton() {
         print("handleMoreInfoButton")
         
-//        let rootViewController = UIApplication.shared.connectedScenes
-//                .filter({$0.activationState == .foregroundActive})
-//                .compactMap({$0 as? UIWindowScene})
-//                .first?.windows
-//                .filter({$0.isKeyWindow}).first?.rootViewController
-        
-        self.delegate?.didTapMoreInfo()
+        guard let cardViewModel = self.cardViewModel else { return }
+        self.delegate?.didTapMoreInfo(cardViewModel: cardViewModel)
 
     }
     
