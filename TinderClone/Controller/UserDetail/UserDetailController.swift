@@ -121,15 +121,12 @@ class UserDetailController: UIViewController {
         scrollView.addSubview(infoLabel)
         infoLabel.anchor(top: swipingView.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 16, left: 16, bottom: 0, right: 16))
         
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapDissmis)))
+        //view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapDissmis)))
         
         scrollView.addSubview(dissmisButton)
         dissmisButton.anchor(top: swipingView.bottomAnchor, leading: nil, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: -25, left: 0, bottom: 0, right: 16), size: .init(width: 50, height: 50))
     }
     
-    @objc fileprivate func handleTapDissmis(gesture: UITapGestureRecognizer) {
-        self.dismiss(animated: true)
-    }
     
     @objc fileprivate func handleDissmisButton() {
         self.dismiss(animated: true)
