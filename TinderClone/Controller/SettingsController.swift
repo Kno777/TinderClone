@@ -114,8 +114,11 @@ class SettingsController: UITableViewController {
             ageRangeCell.minSlider.addTarget(self, action: #selector(handleMinAgeChange), for: .valueChanged)
             ageRangeCell.maxSlider.addTarget(self, action: #selector(handleMaxAgeChange), for: .valueChanged)
             
-            ageRangeCell.minLabel.text = "Min \(user?.minSeekingAge ?? -1)"
-            ageRangeCell.maxLabel.text = "Max \(user?.maxSeekingAge ?? -1)"
+            ageRangeCell.minLabel.text = "Min \(user?.minSeekingAge ?? 18)"
+            ageRangeCell.maxLabel.text = "Max \(user?.maxSeekingAge ?? 99)"
+            
+            ageRangeCell.minSlider.value = Float(user?.minSeekingAge ?? 18)
+            ageRangeCell.maxSlider.value = Float(user?.maxSeekingAge ?? 99)
             
             return ageRangeCell
         } else {
@@ -243,8 +246,8 @@ class SettingsController: UITableViewController {
             "age": self.user?.age ?? 0,
             "profession": self.user?.profession ?? "",
             "bio": self.user?.bio ?? "",
-            "minSeekingAge": self.user?.minSeekingAge ?? -1,
-            "maxSeekingAge": self.user?.maxSeekingAge ?? -1
+            "minSeekingAge": self.user?.minSeekingAge ?? 18,
+            "maxSeekingAge": self.user?.maxSeekingAge ?? 99
         ]
         
         Firestore.firestore().collection("users").document(uid).setData(docData) { err in
