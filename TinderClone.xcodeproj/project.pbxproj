@@ -40,6 +40,7 @@
 		9319CAF62B04A8890047BA6D /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 9319CAF52B04A8890047BA6D /* JGProgressHUD */; };
 		9319CAFA2B04B7BC0047BA6D /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9319CAF92B04B7BC0047BA6D /* Bindable.swift */; };
 		9319CAFF2B04D8D20047BA6D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9319CAFE2B04D8D20047BA6D /* GoogleService-Info.plist */; };
+		931EF28D2B0E232D009C7EE0 /* SendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EF28C2B0E232D009C7EE0 /* SendMessageButton.swift */; };
 		938FDCAA2B06064200DE80DB /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938FDCA92B06064200DE80DB /* SettingsController.swift */; };
 		938FDCAC2B060E8A00DE80DB /* CustomImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938FDCAB2B060E8A00DE80DB /* CustomImagePickerController.swift */; };
 		938FDCAE2B06174A00DE80DB /* HeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938FDCAD2B06174A00DE80DB /* HeaderLabel.swift */; };
@@ -73,6 +74,7 @@
 		9319CAB32B03AD490047BA6D /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		9319CAF92B04B7BC0047BA6D /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		9319CAFE2B04D8D20047BA6D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		931EF28C2B0E232D009C7EE0 /* SendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageButton.swift; sourceTree = "<group>"; };
 		938FDCA92B06064200DE80DB /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		938FDCAB2B060E8A00DE80DB /* CustomImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImagePickerController.swift; sourceTree = "<group>"; };
 		938FDCAD2B06174A00DE80DB /* HeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderLabel.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				938FDCAF2B06177B00DE80DB /* SettingsTableViewCell.swift */,
 				938FDCB42B063F2200DE80DB /* AgeRangeCell.swift */,
 				93BB6A812B0E126E00267DA6 /* MatchView.swift */,
+				931EF28C2B0E232D009C7EE0 /* SendMessageButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				93DB8BB32B01F58300F741F0 /* AppDelegate.swift in Sources */,
 				938FDCAC2B060E8A00DE80DB /* CustomImagePickerController.swift in Sources */,
 				93DB8BCB2B020DF800F741F0 /* HomeBottomControlsStackView.swift in Sources */,
+				931EF28D2B0E232D009C7EE0 /* SendMessageButton.swift in Sources */,
 				93F6BF012B0251BC00AF8EEE /* User.swift in Sources */,
 				93BB6A822B0E126E00267DA6 /* MatchView.swift in Sources */,
 				938FDCBC2B08B9E900DE80DB /* LoginController.swift in Sources */,

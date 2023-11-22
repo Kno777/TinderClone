@@ -30,6 +30,38 @@ class MatchView: UIView {
         imageView.layer.borderWidth = 2
         return imageView
     }()
+    
+    private lazy var itsAMatchImageView: UIImageView = {
+       let imageView = UIImageView(image: UIImage(named: "itsamatch"))
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
+    private lazy var descLabel: UILabel = {
+       let label = UILabel()
+        label.text = "Du lavnes aziz..."
+        label.font = .systemFont(ofSize: 18)
+        label.textColor = .white
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private lazy var sendMessageButton: SendMessageButton = {
+        let button = SendMessageButton(type: .system)
+        button.setTitle("SEND MESSAGE", for: .normal)
+        button.backgroundColor = .yellow
+        button.setTitleColor(.white, for: .normal)
+        return button
+    }()
+    
+    private lazy var keepSwipingButton: SendMessageButton = {
+        let button = SendMessageButton(type: .system)
+        button.setTitle("KEEP SWIPING", for: .normal)
+        button.backgroundColor = .yellow
+        button.setTitleColor(.white, for: .normal)
+        return button
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,9 +77,27 @@ class MatchView: UIView {
     }
     
     fileprivate func setupLayout() {
+        
+        addSubview(keepSwipingButton)
+        
+        addSubview(sendMessageButton)
+        
+        addSubview(itsAMatchImageView)
+        
+        addSubview(descLabel)
+        
         addSubview(currentUserImageView)
         
         addSubview(cardUserImageView)
+        
+        keepSwipingButton.anchor(top: sendMessageButton.bottomAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 16, left: 48, bottom: 0, right: 48), size: .init(width: 0, height: 60))
+        
+        sendMessageButton.anchor(top: currentUserImageView.bottomAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 32, left: 48, bottom: 0, right: 48), size: .init(width: 0, height: 60))
+        
+        itsAMatchImageView.anchor(top: nil, leading: nil, bottom: descLabel.topAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 16, right: 0), size: .init(width: 300, height: 80))
+        itsAMatchImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        
+        descLabel.anchor(top: nil, leading: leadingAnchor, bottom: currentUserImageView.topAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 32, right: 0), size: .init(width: 0, height: 50))
         
         currentUserImageView.anchor(top: nil, leading: nil, bottom: nil, trailing: centerXAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 16), size: .init(width: 140, height: 140))
         currentUserImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
@@ -82,9 +132,4 @@ class MatchView: UIView {
         
         
     }
-}
-
-
-#Preview("MatchView") {
-    MatchView()
 }
