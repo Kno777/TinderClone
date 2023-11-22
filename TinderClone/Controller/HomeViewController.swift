@@ -204,7 +204,7 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
-class HomeController: UIViewController, SettingsControllerDelegate, LoginControllerDelegate, CardViewDelegate {
+class HomeViewController: UIViewController, SettingsControllerDelegate, LoginControllerDelegate, CardViewDelegate {
     
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
@@ -335,12 +335,53 @@ class HomeController: UIViewController, SettingsControllerDelegate, LoginControl
         CATransaction.commit()
     }
     
-    @objc fileprivate func handleDislike() {
+    @objc func handleDislike() {
+        saveSwipeInformationToFirestore(didLike: 0)
         preformSwipeAnimation(translation: -700, angle: -15)
     }
     
-    @objc fileprivate func handleLike() {
+    @objc func handleLike() {
+        saveSwipeInformationToFirestore(didLike: 1)
         preformSwipeAnimation(translation: 700, angle: 15)
+    }
+    
+    fileprivate func saveSwipeInformationToFirestore(didLike: Int) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        guard let cardUID = self.topCardView?.cardViewModel?.uid else { return }
+        
+        let docData: [String: Any] = [
+            cardUID: didLike,
+        ]
+        
+        Firestore.firestore().collection("swipes").document(uid).getDocument { snapshot, err in
+            if let err = err {
+                print("Failed to fetch swipe document:", err)
+                return
+            }
+            
+            if snapshot?.exists == true {
+                Firestore.firestore().collection("swipes").document(uid).updateData(docData) { err in
+                    if let err = err {
+                        print("Failed to update swipe info:", err)
+                        return
+                    }
+                    
+                    print("Successfully updated swiping information...")
+                }
+            } else {
+                Firestore.firestore().collection("swipes").document(uid).setData(docData) { err in
+                    if let err = err {
+                        print("Failed to save swipe data:", err)
+                        return
+                    }
+                    
+                    print("Successfully save swiping information...")
+                }
+            }
+        }
+        
+        
     }
     
     func didRemoveCard(cardView: CardView) {
