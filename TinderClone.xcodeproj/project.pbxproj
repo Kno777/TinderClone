@@ -51,6 +51,7 @@
 		938FDCBC2B08B9E900DE80DB /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938FDCBA2B08B9E900DE80DB /* LoginController.swift */; };
 		938FDCE72B0A529400DE80DB /* UserDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938FDCE62B0A529400DE80DB /* UserDetailController.swift */; };
 		938FDCE92B0B5DD300DE80DB /* SwipingPhotosVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938FDCE82B0B5DD300DE80DB /* SwipingPhotosVController.swift */; };
+		93BB6A822B0E126E00267DA6 /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BB6A812B0E126E00267DA6 /* MatchView.swift */; };
 		93DB8BB32B01F58300F741F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DB8BB22B01F58300F741F0 /* AppDelegate.swift */; };
 		93DB8BB52B01F58300F741F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DB8BB42B01F58300F741F0 /* SceneDelegate.swift */; };
 		93DB8BB72B01F58300F741F0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93DB8BB62B01F58300F741F0 /* HomeViewController.swift */; };
@@ -83,6 +84,7 @@
 		938FDCBA2B08B9E900DE80DB /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		938FDCE62B0A529400DE80DB /* UserDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailController.swift; sourceTree = "<group>"; };
 		938FDCE82B0B5DD300DE80DB /* SwipingPhotosVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosVController.swift; sourceTree = "<group>"; };
+		93BB6A812B0E126E00267DA6 /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
 		93DB8BAF2B01F58300F741F0 /* TinderClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinderClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93DB8BB22B01F58300F741F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93DB8BB42B01F58300F741F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				93DB8BCE2B02308D00F741F0 /* CardView.swift */,
 				938FDCAF2B06177B00DE80DB /* SettingsTableViewCell.swift */,
 				938FDCB42B063F2200DE80DB /* AgeRangeCell.swift */,
+				93BB6A812B0E126E00267DA6 /* MatchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				938FDCAC2B060E8A00DE80DB /* CustomImagePickerController.swift in Sources */,
 				93DB8BCB2B020DF800F741F0 /* HomeBottomControlsStackView.swift in Sources */,
 				93F6BF012B0251BC00AF8EEE /* User.swift in Sources */,
+				93BB6A822B0E126E00267DA6 /* MatchView.swift in Sources */,
 				938FDCBC2B08B9E900DE80DB /* LoginController.swift in Sources */,
 				938FDCAE2B06174A00DE80DB /* HeaderLabel.swift in Sources */,
 				938FDCAA2B06064200DE80DB /* SettingsController.swift in Sources */,
