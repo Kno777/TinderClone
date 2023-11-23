@@ -6,8 +6,40 @@
 //
 
 import UIKit
+import Firebase
 
 class MatchView: UIView {
+    
+    var currentUser: User? {
+        didSet {
+            guard let user = currentUser else { return }
+            guard let url = URL(string: user.imageUrl1 ?? "") else { return }
+            self.currentUserImageView.alpha = 1
+            self.currentUserImageView.sd_setImage(with: url)
+        }
+    }
+    
+    var cardUID: String? {
+        didSet {
+            guard let cardUID = cardUID else { return }
+            
+            Firestore.firestore().collection("users").document(cardUID).getDocument { snapshot, err in
+                if let err = err {
+                    print("Failed to fetch user:", err)
+                    return
+                }
+                
+                guard let dictionary = snapshot?.data() else { return }
+                
+                let user = User(dictionary: dictionary)
+                
+                guard let url = URL(string: user.imageUrl1 ?? "") else { return }
+                self.cardUserImageView.alpha = 1
+                self.cardUserImageView.sd_setImage(with: url)
+                self.setupAnimations()
+            }
+        }
+    }
     
     private let visualEffect = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     
@@ -18,6 +50,7 @@ class MatchView: UIView {
         imageView.layer.cornerRadius = 140 / 2
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.borderWidth = 2
+        imageView.alpha = 0
         return imageView
     }()
     
@@ -28,6 +61,7 @@ class MatchView: UIView {
         imageView.layer.cornerRadius = 140 / 2
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.borderWidth = 2
+        imageView.alpha = 0
         return imageView
     }()
     
@@ -70,7 +104,7 @@ class MatchView: UIView {
         
         setupBlurView()
         setupLayout()
-        setupAnimations()
+        //setupAnimations()
     }
     
     required init?(coder: NSCoder) {
