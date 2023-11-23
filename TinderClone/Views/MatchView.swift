@@ -39,7 +39,7 @@ class MatchView: UIView {
     
     private lazy var descLabel: UILabel = {
        let label = UILabel()
-        label.text = "Du lavnes aziz..."
+        label.text = "Es inch kextot batedzda...."
         label.font = .systemFont(ofSize: 18)
         label.textColor = .white
         label.textAlignment = .center
@@ -70,11 +70,50 @@ class MatchView: UIView {
         
         setupBlurView()
         setupLayout()
+        setupAnimations()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    fileprivate func setupAnimations() {
+            // starting positions
+            let angle = 30 * CGFloat.pi / 180
+            
+            currentUserImageView.transform = CGAffineTransform(rotationAngle: -angle).concatenating(CGAffineTransform(translationX: 200, y: 0))
+            
+            cardUserImageView.transform = CGAffineTransform(rotationAngle: angle).concatenating(CGAffineTransform(translationX: -200, y: 0))
+            
+            sendMessageButton.transform = CGAffineTransform(translationX: -500, y: 0)
+            keepSwipingButton.transform = CGAffineTransform(translationX: 500, y: 0)
+            
+            // keyframe animations for segmented animation
+            
+            UIView.animateKeyframes(withDuration: 1.3, delay: 0, options: .calculationModeCubic, animations: {
+                
+                // animation 1 - translation back to original position
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.45, animations: {
+                    self.currentUserImageView.transform = CGAffineTransform(rotationAngle: -angle)
+                    self.cardUserImageView.transform = CGAffineTransform(rotationAngle: angle)
+                })
+                
+                // animation 2 - rotation
+                UIView.addKeyframe(withRelativeStartTime: 0.6, relativeDuration: 0.4, animations: {
+                    self.currentUserImageView.transform = .identity
+                    self.cardUserImageView.transform = .identity
+                })
+                
+                
+            }) { (_) in
+                
+            }
+            
+            UIView.animate(withDuration: 0.75, delay: 0.6 * 1.3, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
+                self.sendMessageButton.transform = .identity
+                self.keepSwipingButton.transform = .identity
+            })
+        }
     
     fileprivate func setupLayout() {
         
