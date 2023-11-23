@@ -42,6 +42,7 @@
 		9319CAFF2B04D8D20047BA6D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9319CAFE2B04D8D20047BA6D /* GoogleService-Info.plist */; };
 		931EF28D2B0E232D009C7EE0 /* SendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EF28C2B0E232D009C7EE0 /* SendMessageButton.swift */; };
 		931EF2902B0F5369009C7EE0 /* MatchesMessangesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EF28F2B0F5369009C7EE0 /* MatchesMessangesController.swift */; };
+		931EF2922B0F6E24009C7EE0 /* MatchesNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EF2912B0F6E24009C7EE0 /* MatchesNavBar.swift */; };
 		938FDCAA2B06064200DE80DB /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938FDCA92B06064200DE80DB /* SettingsController.swift */; };
 		938FDCAC2B060E8A00DE80DB /* CustomImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938FDCAB2B060E8A00DE80DB /* CustomImagePickerController.swift */; };
 		938FDCAE2B06174A00DE80DB /* HeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938FDCAD2B06174A00DE80DB /* HeaderLabel.swift */; };
@@ -78,6 +79,7 @@
 		9319CAFE2B04D8D20047BA6D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		931EF28C2B0E232D009C7EE0 /* SendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageButton.swift; sourceTree = "<group>"; };
 		931EF28F2B0F5369009C7EE0 /* MatchesMessangesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesMessangesController.swift; sourceTree = "<group>"; };
+		931EF2912B0F6E24009C7EE0 /* MatchesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesNavBar.swift; sourceTree = "<group>"; };
 		938FDCA92B06064200DE80DB /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		938FDCAB2B060E8A00DE80DB /* CustomImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImagePickerController.swift; sourceTree = "<group>"; };
 		938FDCAD2B06174A00DE80DB /* HeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderLabel.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				938FDCAB2B060E8A00DE80DB /* CustomImagePickerController.swift */,
 				93F6BF0A2B03905200AF8EEE /* CustomTextField.swift */,
 				938FDCB62B066B0400DE80DB /* AgeRangeLabel.swift */,
+				931EF2912B0F6E24009C7EE0 /* MatchesNavBar.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -470,6 +473,7 @@
 				938FDCB02B06177B00DE80DB /* SettingsTableViewCell.swift in Sources */,
 				93DB8BB72B01F58300F741F0 /* HomeViewController.swift in Sources */,
 				93DB8BB32B01F58300F741F0 /* AppDelegate.swift in Sources */,
+				931EF2922B0F6E24009C7EE0 /* MatchesNavBar.swift in Sources */,
 				938FDCAC2B060E8A00DE80DB /* CustomImagePickerController.swift in Sources */,
 				931EF2902B0F5369009C7EE0 /* MatchesMessangesController.swift in Sources */,
 				93DB8BCB2B020DF800F741F0 /* HomeBottomControlsStackView.swift in Sources */,

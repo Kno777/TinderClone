@@ -55,7 +55,7 @@ class HomeViewController: UIViewController, SettingsControllerDelegate, LoginCon
     @objc fileprivate func handleMessage() {
         print("message")
         
-        let vc = MatchesMessangesController(collectionViewLayout: UICollectionViewFlowLayout())
+        let vc = MatchesMessangesController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
