@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
+
 class HomeViewController: UIViewController, SettingsControllerDelegate, LoginControllerDelegate, CardViewDelegate {
     
     let topStackView = TopNavigationStackView()
@@ -20,7 +21,11 @@ class HomeViewController: UIViewController, SettingsControllerDelegate, LoginCon
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.isHidden = true
+        
         topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
+        topStackView.messageButton.addTarget(self, action: #selector(handleMessage), for: .touchUpInside)
+        
         bottomControls.refreshButton.addTarget(self, action: #selector(handleRefresh), for: .touchUpInside)
         bottomControls.likeButton.addTarget(self, action: #selector(handleLike), for: .touchUpInside)
         bottomControls.dislikeButton.addTarget(self, action: #selector(handleDislike), for: .touchUpInside)
@@ -46,6 +51,13 @@ class HomeViewController: UIViewController, SettingsControllerDelegate, LoginCon
     
     fileprivate let hud = JGProgressHUD(style: .dark)
     fileprivate var user: User?
+    
+    @objc fileprivate func handleMessage() {
+        print("message")
+        
+        let vc = MatchesMessangesController(collectionViewLayout: UICollectionViewFlowLayout())
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
     fileprivate func fetchCurrentUser() {
         
