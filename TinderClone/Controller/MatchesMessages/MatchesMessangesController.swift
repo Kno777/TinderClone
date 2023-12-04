@@ -49,12 +49,6 @@ class MatchesMessangesController: LBTAListController<MatchCell, Match>, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        items = [
-//            .init(name: "Test", profileImageUrl: "1"),
-//            .init(name: "Test 2", profileImageUrl: "2"),
-//            .init(name: "Test 3", profileImageUrl: "3"),
-//        ]
-        
         self.collectionView.contentInset.top = 150
         self.collectionView.backgroundColor = .white
                 
@@ -64,6 +58,12 @@ class MatchesMessangesController: LBTAListController<MatchCell, Match>, UICollec
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: 120, height: 140)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let match = items[indexPath.row]
+        let chatLogController = ChatLogController(match: match)
+        self.navigationController?.pushViewController(chatLogController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
