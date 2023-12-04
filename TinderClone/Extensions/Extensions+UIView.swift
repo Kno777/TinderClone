@@ -14,9 +14,9 @@ extension UIColor {
     }
 }
 
-struct AnchoredConstraints {
-    var top, leading, bottom, trailing, width, height: NSLayoutConstraint?
-}
+//struct AnchoredConstraints {
+//    var top, leading, bottom, trailing, width, height: NSLayoutConstraint?
+//}
 
 // Reference Video: https://youtu.be/iqpAP7s3b-8
 //extension UIView {
