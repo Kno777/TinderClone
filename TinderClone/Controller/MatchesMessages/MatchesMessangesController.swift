@@ -44,7 +44,79 @@ class MatchCell: LBTAListCell<Match> {
     }
 }
 
-class MatchesMessangesController: LBTAListController<MatchCell, Match>, UICollectionViewDelegateFlowLayout {
+class MatchesHorizontalController: LBTAListController<MatchCell, Match>, UICollectionViewDelegateFlowLayout {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+        }
+        
+        setupFetchMatches()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return .init(width: 110, height: view.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        .init(top: 0, left: 4, bottom: 0, right: 16)
+    }
+    
+    fileprivate func setupFetchMatches() {
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        
+        Firestore.firestore().collection("matches_messages").document(currentUserId).collection("matches").getDocuments { snapshot, err in
+            
+            if let err = err {
+                print("Failed to fetch matches:", err)
+                return
+            }
+            
+            var matches = [Match]()
+            snapshot?.documents.forEach({ snpashot in
+                
+                let dictionary = snpashot.data()
+                matches.append(.init(dictionary: dictionary))
+            })
+            
+            self.items = matches
+            self.collectionView.reloadData()
+        }
+    }
+}
+
+class MatchesHeader: UICollectionReusableView {
+    
+    let newMatchesLebel = UILabel(text: "New Matches", font: .boldSystemFont(ofSize: 18), textColor: .orange)
+    
+    let horizontalViewController = MatchesHorizontalController()
+    
+    let messagesLebel = UILabel(text: "Messages", font: .boldSystemFont(ofSize: 18), textColor: .orange)
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        stack(stack(newMatchesLebel).padLeft(20),
+              horizontalViewController.view,
+              stack(messagesLebel).padLeft(20),
+              spacing: 20
+        ).withMargins(.init(top: 20, left: 0, bottom: 20, right: 0))
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class MatchesMessangesController: LBTAListHeaderController<MatchCell, Match, MatchesHeader>, UICollectionViewDelegateFlowLayout {
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return .init(width: view.frame.width, height: 250)
+    }
     
     let customNavBar = MatchesNavBar()
     
@@ -57,6 +129,7 @@ class MatchesMessangesController: LBTAListController<MatchCell, Match>, UICollec
         setupCustomNavBarView()
         setupFetchMatches()
     }
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: 120, height: 140)
